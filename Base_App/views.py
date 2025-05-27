@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from Base_App.models import BookTable, AboutUs, Feedback, ItemList, Items
+from Base_App.models import BookTable, AboutUs, Feedback, ItemList, Items 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 
 # Create your views here.
 
@@ -52,7 +52,7 @@ def LoginPage(request):
 
 def LogoutPage(request):
     logout(request)
-    return redirect('login')
+    return redirect('Home')
 
 
 
@@ -85,4 +85,18 @@ def BookTableView(request):
 
 
 def FeedbackView(request):
+    if request.method == 'POST':
+        user_name = request.POST.get('user_name')
+        description = request.POST.get('description')
+        rating = request.POST.get('rating')
+        image = request.FILES.get('image')
+
+        Feedback.objects.create(
+            user_name=user_name,
+            description=description,
+            rating=rating,
+            image=image
+        )
+        return redirect('Feedback_Form')  # or redirect to a thank-you page
+
     return render(request, 'feedback.html')

@@ -22,7 +22,8 @@ from Base_App.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', SignupPage, name='signup'),
+    path('', HomeView, name='Home'),
+    path('signup/', SignupPage, name='signup'),
     path('login/', LoginPage, name='login'),
     path('logout/',LogoutPage, name='logout'),
     path('home/', HomeView,name="Home"),

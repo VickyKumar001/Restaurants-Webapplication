@@ -21,14 +21,17 @@ class Items(models.Model):
 class AboutUs(models.Model):
     Description = models.TextField(blank=False)
 
+
+
 class Feedback(models.Model):
-    User_name = models.CharField(max_length=15)
-    Description = models.TextField(blank=False)
-    Rating = models.IntegerField()
-    Image = models.ImageField(upload_to='items/', blank=True)
+    user_name = models.CharField(max_length=100)
+    description = models.TextField()
+    rating = models.IntegerField()
+    image = models.ImageField(upload_to='feedback_images/', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.User_name
+        return self.user_name
     
 
 class BookTable(models.Model):

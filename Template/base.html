@@ -137,9 +137,15 @@
                 </button>
               </form>
               {% endcomment %}
-              <a href="{% url 'login' %}" class="order_online">
-                Log Out
-              </a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="order_online">
+                  Log Out
+                </a>
+              {% else %}
+                <a href="{% url 'login' %}" class="order_online">
+                  Log In
+                </a>
+              {% endif %}
             </div>
           </div>
         </nav>

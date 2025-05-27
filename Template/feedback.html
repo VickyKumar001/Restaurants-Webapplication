@@ -17,48 +17,41 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="{% url "Book_Table" %}" method='POST'>{% csrf_token %}
-              <div>
-                <input type="text" class="form-control" name="user_name" required placeholder="Your Name" />
-              </div>
-              <div class="mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" name="Description" rows="3" required placeholder="Describe your experience here">
+            
+            {% if user.is_authenticated %}
+              <form action="{% url 'Feedback_Form' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                  <input type="text" class="form-control" name="user_name" required placeholder="Your Name" />
+                </div>
+                <div class="mb-3">
+                  <textarea class="form-control" name="description" rows="3" required placeholder="Describe your experience here"></textarea>
+                </div>
+                <div>
+                  <select class="form-control nice-select wide" required name="rating">
+                    <option value="" disabled selected>Please Give Us Rating?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="formFileLg" class="form-label">Select Image</label>
+                  <input class="form-control form-control-lg" id="formFileLg" type="file" name="image">
+                </div>
+                <div class="btn_box">
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
+            {% else %}
+              <h3>If you want to suggest something then </h3>
+              <h6 class="text-danger">
+                Please <a href="{% url 'login' %}">log in</a> first to give your valuable suggestion.
+              </h6>
+            {% endif %}
 
-                </textarea>
-                
-              </div>
-              <div>
-                <select class="form-control nice-select wide" required name="total_person">
-                  <option value="" disabled selected>
-                    Please Give Us Rating?
-                  </option>
-                  <option value="1">
-                    1
-                  </option>
-                  <option value="2">
-                    2
-                  </option>
-                  <option value="3">
-                    3
-                  </option>
-                  <option value="4">
-                    4
-                  </option>
-                  <option value="5">
-                    5
-                  </option>
-                </select>
-              </div>
-              <div>
-                <label for="formFileLg" class="form-label">Select Image</label>
-                <input class="form-control form-control-lg" id="formFileLg" type="file">
-              </div>
-              <div class="btn_box">
-                <button>
-                  Submit
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
